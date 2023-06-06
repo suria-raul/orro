@@ -56,6 +56,8 @@ function numberNames(int $number)
             return thirty($number);
         }
     }
+
+    return $ones[$number];
 }
 
 function twenty(int $number)
@@ -91,6 +93,16 @@ function firstGroup(int $number): string
     return numberNames($firstGroup) . ' ' . $mainNotation;
 }
 
+function secondGroup($number)
+{
+    $secondGroup = omitZero(backToString(groupNumbers($number)[1]));
+    $thirdGroup = backToString(groupNumbers($number)[2]);
+    $length = strlen($secondGroup . $thirdGroup);
+    $notation = scientificNotationName($length);
+
+    return numberNames($secondGroup) . ' ' . $notation;
+}
+
 function groupNumbers($number)
 {
     $reverseOrder = strrev($number);
@@ -106,10 +118,20 @@ function backToString($number)
     return strrev($string);
 }
 
+function omitZero($number)
+{
+    $toArray = str_split($number);
+    if ($toArray[0] == 0) {
+        return ltrim($number, '0');
+    }
+
+    return $number;
+}
+
 function numberToWords($number)
 {
     $number = explode('.', $number);
-    return firstGroup(number: $number[0]);
+    return firstGroup(number: $number[0]) . ' ' . secondGroup(number: $number[0]);
 }
 
 echo numberToWords(10002005.77);
