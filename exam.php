@@ -179,46 +179,21 @@ function ninety(int $number)
     return 'NINETY ' . numberNames(number: $digits[1]);
 }
 
-
-function firstGroup(int $number): string
-{
-    $number = omitZero($number);
-    $mainNotation = scientificNotationName(number: $number);
-
-    $firstGroup = backToString(groupNumbers($number)[0]);
-
-    return numberNames($firstGroup) . ' ' . $mainNotation;
-}
-
-function secondGroup($number)
-{
-    $secondGroup = omitZero(backToString(groupNumbers($number)[1]));
-    $thirdGroup = backToString(groupNumbers($number)[2]);
-    $notation = scientificNotationName($secondGroup . $thirdGroup);
-
-    return numberNames($secondGroup) . ' ' . $notation;
-}
-
-function thirdGroup($number)
-{
-    $thirdGroup = omitZero(backToString(groupNumbers($number)[2]));
-    $notation = scientificNotationName($thirdGroup);
-
-    return numberNames($thirdGroup) . ' ' . $notation;
-}
-
 function cent($number)
 {
-    return ' AND ' . numberNames($number);
+    return ' AND ' . numberNames($number) . ' CENTS';
 }
 
-function groupNumbers($number)
+function groupNumbers($number): array
 {
-    $reverseOrder = strrev($number);
+    $mainNumbers = explode('.', $number);
+    $reverseOrder = strrev($mainNumbers[0]);
     $toArray = str_split($reverseOrder);
     $toGroup = array_chunk($toArray, 3);
     // grouped in reverse order
-    return array_reverse($toGroup);
+    $revGroup = array_reverse($toGroup);
+
+    return array_map('backToString', $revGroup);
 }
 
 function backToString($number)
@@ -227,7 +202,7 @@ function backToString($number)
     return strrev($string);
 }
 
-function omitZero($number)
+function omitPrefixZero($number)
 {
     $toArray = str_split($number);
     if ($toArray[0] == 0) {
@@ -240,8 +215,24 @@ function omitZero($number)
 function numberToWords($number)
 {
     $number = explode('.', $number);
-    $cent = cent(omitZero($number[1]));
-    return firstGroup(number: $number[0]) . ' ' . secondGroup(number: $number[0]) . ' ' . thirdGroup(number: $number[0]) . $cent . PHP_EOL;
+    $words = [];
+    $notations = [];
+
+    $numberLength = strlen($number[0]);
+    $numberArrLength = count(groupNumbers($number[0])) - 1;
+    for ($i = 0; $i < $numberArrLength; $i++) {
+        $notations[] = scientificNotationName(omitPrefixZero(substr($number[0], $i, $numberLength)));
+    }
+
+    foreach (groupNumbers($number[0]) as $group) {
+        $words[] = omitPrefixZero(numberNames($group));
+    }
+
+    $numberToWords = array_map(function ($word, $notation) {
+        return $word . ' ' . $notation;
+    }, $words, $notations);
+
+    return implode(' ', $numberToWords) . cent($number[1]);
 }
 
-echo numberToWords(10002005.77);
+print_r(numberToWords(1789501.25));
