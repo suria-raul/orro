@@ -207,6 +207,11 @@ function thirdGroup($number)
     return numberNames($thirdGroup) . ' ' . $notation;
 }
 
+function cent($number)
+{
+    return ' AND ' . numberNames($number);
+}
+
 function groupNumbers($number)
 {
     $reverseOrder = strrev($number);
@@ -235,8 +240,8 @@ function omitZero($number)
 function numberToWords($number)
 {
     $number = explode('.', $number);
-    $cent = numberNames($number[1]);
-    return firstGroup(number: $number[0]) . ' ' . secondGroup(number: $number[0]) . ' ' . thirdGroup(number: $number[0]) . ' AND ' . $cent . PHP_EOL;
+    $cent = cent(omitZero($number[1]));
+    return firstGroup(number: $number[0]) . ' ' . secondGroup(number: $number[0]) . ' ' . thirdGroup(number: $number[0]) . $cent . PHP_EOL;
 }
 
 echo numberToWords(10002005.77);
