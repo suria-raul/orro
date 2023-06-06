@@ -1,7 +1,13 @@
 <?php
 
-function scientificNotationName(int $key)
+function scientificNotationName(int $number)
 {
+    $key = strlen($number);
+
+    if ($key < 3) {
+        return;
+    }
+
     $notations = [
         3 => 'HUNDRED',
         4 => 'THOUSAND',
@@ -55,6 +61,30 @@ function numberNames(int $number)
         if (str_split($number)[0] == 3) {
             return thirty($number);
         }
+
+        if (str_split($number)[0] == 4) {
+            return forty($number);
+        }
+
+        if (str_split($number)[0] == 5) {
+            return fifty($number);
+        }
+
+        if (str_split($number)[0] == 6) {
+            return sixty($number);
+        }
+
+        if (str_split($number)[0] == 7) {
+            return seventy($number);
+        }
+
+        if (str_split($number)[0] == 8) {
+            return eighty($number);
+        }
+
+        if (str_split($number)[0] == 9) {
+            return ninety($number);
+        }
     }
 
     return $ones[$number];
@@ -82,11 +112,78 @@ function thirty(int $number)
     return 'THIRTY ' . numberNames(number: $digits[1]);
 }
 
+function forty(int $number)
+{
+    $digits = str_split($number);
+
+    if ($number == 40) {
+        return 'FORTY';
+    }
+
+    return 'FORTY ' . numberNames(number: $digits[1]);
+}
+
+function fifty(int $number)
+{
+    $digits = str_split($number);
+
+    if ($number == 50) {
+        return 'FIFTY';
+    }
+
+    return 'FIFTY ' . numberNames(number: $digits[1]);
+}
+
+function sixty(int $number)
+{
+    $digits = str_split($number);
+
+    if ($number == 60) {
+        return 'SIXTY';
+    }
+
+    return 'SIXTY ' . numberNames(number: $digits[1]);
+}
+
+function seventy(int $number)
+{
+    $digits = str_split($number);
+
+    if ($number == 70) {
+        return 'SEVENTY';
+    }
+
+    return 'SEVENTY ' . numberNames(number: $digits[1]);
+}
+
+function eighty(int $number)
+{
+    $digits = str_split($number);
+
+    if ($number == 80) {
+        return 'EIGHTY';
+    }
+
+    return 'EIGHTY ' . numberNames(number: $digits[1]);
+}
+
+
+function ninety(int $number)
+{
+    $digits = str_split($number);
+
+    if ($number == 90) {
+        return 'NINETY';
+    }
+
+    return 'NINETY ' . numberNames(number: $digits[1]);
+}
+
+
 function firstGroup(int $number): string
 {
-    $length = strlen($number);
-
-    $mainNotation = scientificNotationName(key: $length);
+    $number = omitZero($number);
+    $mainNotation = scientificNotationName(number: $number);
 
     $firstGroup = backToString(groupNumbers($number)[0]);
 
@@ -97,10 +194,17 @@ function secondGroup($number)
 {
     $secondGroup = omitZero(backToString(groupNumbers($number)[1]));
     $thirdGroup = backToString(groupNumbers($number)[2]);
-    $length = strlen($secondGroup . $thirdGroup);
-    $notation = scientificNotationName($length);
+    $notation = scientificNotationName($secondGroup . $thirdGroup);
 
     return numberNames($secondGroup) . ' ' . $notation;
+}
+
+function thirdGroup($number)
+{
+    $thirdGroup = omitZero(backToString(groupNumbers($number)[2]));
+    $notation = scientificNotationName($thirdGroup);
+
+    return numberNames($thirdGroup) . ' ' . $notation;
 }
 
 function groupNumbers($number)
@@ -131,7 +235,8 @@ function omitZero($number)
 function numberToWords($number)
 {
     $number = explode('.', $number);
-    return firstGroup(number: $number[0]) . ' ' . secondGroup(number: $number[0]);
+    $cent = numberNames($number[1]);
+    return firstGroup(number: $number[0]) . ' ' . secondGroup(number: $number[0]) . ' ' . thirdGroup(number: $number[0]) . ' AND ' . $cent . PHP_EOL;
 }
 
 echo numberToWords(10002005.77);
