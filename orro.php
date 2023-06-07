@@ -35,19 +35,21 @@ function numberNames(int $number): string
         9 => 'NINE',
     ];
 
-    if (strlen($number) == 2) {
-        if (str_split($number)[0] == 1) {
-            return teens(key: $number);
-        }
+    switch (strlen($number)) {
+        case 2:
+            if (str_split($number)[0] == 1) {
+                return teens(key: $number);
+            }
 
-        if (str_split($number)[0] > 1) {
-            return tensToWords(number: $number);
-        }
-
-    } elseif (strlen($number) == 3) {
-        if (str_split($number)[0] > 0) {
-            return hundredsToWords(number: $number);
-        }
+            if (str_split($number)[0] > 1) {
+                return tensToWords(number: $number);
+            }
+            break;
+        case 3:
+            if (str_split($number)[0] > 0) {
+                return hundredsToWords(number: $number);
+            }
+            break;
     }
 
     return $ones[$number];
