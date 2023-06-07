@@ -22,7 +22,7 @@ function scientificNotationName(int $number)
     return $notations[$key];
 }
 
-function numberNames(int $number)
+function numberNames(int $number): string
 {
     $ones = [
         0 => '',
@@ -55,7 +55,7 @@ function numberNames(int $number)
     return $ones[$number];
 }
 
-function teens(int $key)
+function teens(int $key): string
 {
     $numbers = [
         10 => 'TEN',
@@ -73,7 +73,7 @@ function teens(int $key)
     return $numbers[$key];
 }
 
-function tensToWords(int $number)
+function tensToWords(int $number): string
 {
     $tens = [
         20 => 'TWENTY',
@@ -96,7 +96,7 @@ function tensToWords(int $number)
     return $tens[$number];
 }
 
-function hundredsToWords(int $number)
+function hundredsToWords(int $number): string
 {
     $hundreds = [
         100 => 'ONE HUNDRED',
@@ -125,12 +125,12 @@ function hundredsToWords(int $number)
     return $hundreds[$number];
 }
 
-function cent($number)
+function cent(int $number): string
 {
     return 'AND ' . numberNames($number) . ' CENTS';
 }
 
-function groupNumbers($number): array
+function groupNumbers(float|int $number): array
 {
     $mainNumbers = explode('.', $number);
     $reverseOrder = strrev($mainNumbers[0]);
@@ -142,13 +142,13 @@ function groupNumbers($number): array
     return array_map('backToString', $revGroup);
 }
 
-function backToString($number)
+function backToString(array $number): string
 {
     $string = implode('', $number);
     return strrev($string);
 }
 
-function omitPrefixZero($number)
+function omitPrefixZero(string $number): string
 {
     $toArray = str_split($number);
     if ($toArray[0] == 0) {
@@ -158,7 +158,7 @@ function omitPrefixZero($number)
     return $number;
 }
 
-function numberToWords($number)
+function numberToWords(float|int $number): string
 {
     $number = explode('.', $number);
     $words = [];
@@ -187,8 +187,8 @@ function numberToWords($number)
     return implode(' ', $numberToWords) . cent($number[1]) . PHP_EOL;
 }
 
-print_r(numberToWords(10002005.77));
-
+//print_r(numberToWords(10002005.77));
+echo numberToWords(10002005.77);
 
 // 100001.01 pass
 // 1789501.25 pass
