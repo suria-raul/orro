@@ -9,7 +9,7 @@ function scientificNotationName(int $number)
     }
 
     $notations = [
-        3 => 'HUNDRED',
+//        3 => 'HUNDRED',
         4 => 'THOUSAND',
         5 => 'THOUSAND', //TEN
         6 => 'THOUSAND',
@@ -35,96 +35,6 @@ function numberNames(int $number)
         7 => 'SEVEN',
         8 => 'EIGHT',
         9 => 'NINE',
-//        10 => 'TEN',
-//        11 => 'ELEVEN',
-//        12 => 'TWELVE',
-//        13 => 'THIRTEEN',
-//        14 => 'FOURTEEN',
-//        15 => 'FIFTEEN',
-//        16 => 'SIXTEEN',
-//        17 => 'SEVENTEEN',
-//        18 => 'EIGHTEEN',
-//        19 => 'NINETEEN',
-//        20 => 'TWENTY',
-//        21 => 'TWENTY ONE',
-//        22 => 'TWENTY TWO',
-//        23 => 'TWENTY THREE',
-//        24 => 'TWENTY FOUR',
-//        25 => 'TWENTY FIVE',
-//        26 => 'TWENTY SIX',
-//        27 => 'TWENTY SEVEN',
-//        28 => 'TWENTY EIGHT',
-//        29 => 'TWENTY NINE',
-//        30 => 'THIRTY',
-//        31 => 'THIRTY ONE',
-//        32 => 'THIRTY TWO',
-//        33 => 'THIRTY THREE',
-//        34 => 'THIRTY FOUR',
-//        35 => 'THIRTY FIVE',
-//        36 => 'THIRTY SIX',
-//        37 => 'THIRTY SEVEN',
-//        38 => 'THIRTY EIGHT',
-//        39 => 'THIRTY NINE',
-//        40 => 'FORTY',
-//        41 => 'FORTY ONE',
-//        42 => 'FORTY TWO',
-//        43 => 'FORTY THREE',
-//        44 => 'FORTY FOUR',
-//        45 => 'FORTY FIVE',
-//        46 => 'FORTY SIX',
-//        47 => 'FORTY SEVEN',
-//        48 => 'FORTY EIGHT',
-//        49 => 'FORTY NINE',
-//        50 => 'FIFTY',
-//        51 => 'FIFTY ONE',
-//        52 => 'FIFTY TWO',
-//        53 => 'FIFTY THREE',
-//        54 => 'FIFTY FOUR',
-//        55 => 'FIFTY FIVE',
-//        56 => 'FIFTY SIX',
-//        57 => 'FIFTY SEVEN',
-//        58 => 'FIFTY EIGHT',
-//        59 => 'FIFTY NINE',
-//        60 => 'SIXTY',
-//        61 => 'SIXTY ONE',
-//        62 => 'SIXTY TWO',
-//        63 => 'SIXTY THREE',
-//        64 => 'SIXTY FOUR',
-//        65 => 'SIXTY FIVE',
-//        66 => 'SIXTY SIX',
-//        67 => 'SIXTY SEVEN',
-//        68 => 'SIXTY EIGHT',
-//        69 => 'SIXTY NINE',
-//        70 => 'SEVENTY',
-//        71 => 'SEVENTY ONE',
-//        72 => 'SEVENTY TWO',
-//        73 => 'SEVENTY THREE',
-//        74 => 'SEVENTY FOUR',
-//        75 => 'SEVENTY FIVE',
-//        76 => 'SEVENTY SIX',
-//        77 => 'SEVENTY SEVEN',
-//        78 => 'SEVENTY EIGHT',
-//        79 => 'SEVENTY NINE',
-//        80 => 'EIGHTY',
-//        81 => 'EIGHTY ONE',
-//        82 => 'EIGHTY TWO',
-//        83 => 'EIGHTY THREE',
-//        84 => 'EIGHTY FOUR',
-//        85 => 'EIGHTY FIVE',
-//        86 => 'EIGHTY SIX',
-//        87 => 'EIGHTY SEVEN',
-//        88 => 'EIGHTY EIGHT',
-//        89 => 'EIGHTY NINE',
-//        90 => 'NINETY',
-//        91 => 'NINETY ONE',
-//        92 => 'NINETY TWO',
-//        93 => 'NINETY THREE',
-//        94 => 'NINETY FOUR',
-//        95 => 'NINETY FIVE',
-//        96 => 'NINETY SIX',
-//        97 => 'NINETY SEVEN',
-//        98 => 'NINETY EIGHT',
-//        99 => 'NINETY NINE',
     ];
 
     if (strlen($number) == 2) {
@@ -222,9 +132,20 @@ function teens(int $key)
     return $numbers[$key];
 }
 
-function tens(int $key)
+function tensToWords(int $key)
 {
+    $tens = [
+        20 => 'TWENTY',
+        30 => 'THIRTY',
+        40 => 'FORTY',
+        50 => 'FIFTY',
+        60 => 'SIXTY',
+        70 => 'SEVENTY',
+        80 => 'EIGHTY',
+        90 => 'NINETY',
+    ];
 
+    return $tens[$key];
 }
 
 function twenty(int $number)
@@ -332,7 +253,7 @@ function twoHundred(int $number)
     $digits = str_split($number);
 
     if ($number == 200) {
-        return 'TWO';
+        return 'TWO HUNDRED';
     }
 
     return 'TWO HUNDRED ' . numberNames(number: $digits[1] . $digits[2]);
@@ -343,7 +264,7 @@ function threeHundred(int $number)
     $digits = str_split($number);
 
     if ($number == 300) {
-        return 'THREE';
+        return 'THREE HUNDRED';
     }
 
     return 'THREE HUNDRED ' . numberNames(number: $digits[1] . $digits[2]);
@@ -354,7 +275,7 @@ function fourHundred(int $number)
     $digits = str_split($number);
 
     if ($number == 400) {
-        return 'FOUR';
+        return 'FOUR HUNDRED';
     }
 
     return 'FOUR HUNDRED ' . numberNames(number: $digits[1] . $digits[2]);
@@ -365,7 +286,7 @@ function fiveHundred(int $number)
     $digits = str_split($number);
 
     if ($number == 500) {
-        return 'FIVE';
+        return 'FIVE HUNDRED';
     }
 
     return 'FIVE HUNDRED ' . numberNames(number: $digits[1] . $digits[2]);
@@ -376,7 +297,7 @@ function sixHundred(int $number)
     $digits = str_split($number);
 
     if ($number == 600) {
-        return 'SIX';
+        return 'SIX HUNDRED';
     }
 
     return 'SIX HUNDRED ' . numberNames(number: $digits[1] . $digits[2]);
@@ -387,7 +308,7 @@ function sevenHundred(int $number)
     $digits = str_split($number);
 
     if ($number == 700) {
-        return 'SEVEN';
+        return 'SEVEN HUNDRED';
     }
 
     return 'SEVEN HUNDRED ' . numberNames(number: $digits[1] . $digits[2]);
@@ -398,7 +319,7 @@ function eightHundred(int $number)
     $digits = str_split($number);
 
     if ($number == 800) {
-        return 'EIGHT';
+        return 'EIGHT HUNDRED';
     }
 
     return 'EIGHT HUNDRED ' . numberNames(number: $digits[1] . $digits[2]);
@@ -409,7 +330,7 @@ function nineHundred(int $number)
     $digits = str_split($number);
 
     if ($number == 900) {
-        return 'NINE';
+        return 'NINE HUNDRED';
     }
 
     return 'NINE HUNDRED ' . numberNames(number: $digits[1] . $digits[2]);
