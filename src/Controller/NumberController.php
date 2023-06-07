@@ -15,7 +15,7 @@ class NumberController
 
     protected function cent(int $number): string
     {
-        return 'AND ' . $this->numberModel->numberNames(number: $number) . ' CENTS';
+        return ' AND ' . $this->numberModel->numberNames(number: $number) . ' CENTS';
     }
 
     protected function groupNumbers(float|int $number): array

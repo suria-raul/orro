@@ -5,7 +5,7 @@ namespace App\Model;
 class Number
 {
     protected array $notations = [
-//        3 => 'HUNDRED',
+        3 => 'HUNDRED',
         4 => 'THOUSAND',
         5 => 'THOUSAND', //TEN
         6 => 'THOUSAND', // HUNDRED
