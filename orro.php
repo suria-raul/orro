@@ -47,40 +47,8 @@ function numberNames(int $number)
         }
 
     } elseif (strlen($number) == 3) {
-        if (str_split($number)[0] == 1) {
-            return oneHundred($number);
-        }
-
-        if (str_split($number)[0] == 2) {
-            return twoHundred($number);
-        }
-
-        if (str_split($number)[0] == 3) {
-            return threeHundred($number);
-        }
-
-        if (str_split($number)[0] == 4) {
-            return fourHundred($number);
-        }
-
-        if (str_split($number)[0] == 5) {
-            return fiveHundred($number);
-        }
-
-        if (str_split($number)[0] == 6) {
-            return sixHundred($number);
-        }
-
-        if (str_split($number)[0] == 7) {
-            return sevenHundred($number);
-        }
-
-        if (str_split($number)[0] == 8) {
-            return eightHundred($number);
-        }
-
-        if (str_split($number)[0] == 9) {
-            return nineHundred($number);
+        if (str_split($number)[0] > 0) {
+            return hundredsToWords($number);
         }
     }
 
@@ -128,103 +96,33 @@ function tensToWords(int $number)
     return $tens[$number];
 }
 
-function oneHundred(int $number)
+function hundredsToWords(int $number)
 {
+    $hundreds = [
+        100 => 'ONE HUNDRED',
+        200 => 'TWO HUNDRED',
+        300 => 'THREE HUNDRED',
+        400 => 'FOUR HUNDRED',
+        500 => 'FIVE HUNDRED',
+        600 => 'SIX HUNDRED',
+        700 => 'SEVEN HUNDRED',
+        800 => 'EIGHT HUNDRED',
+        900 => 'NINE HUNDRED',
+    ];
+
     $digits = str_split($number);
 
-    if ($number == 100) {
-        return 'ONE HUNDRED';
+    if ($digits[1] == 0 && $digits[2] > 0) {
+        $key = $digits[0] * 100;
+        return $hundreds[$key] . ' ' . numberNames($digits[2]);
     }
 
-    return 'ONE HUNDRED ' . numberNames(number: $digits[1] . $digits[2]);
-}
-
-function twoHundred(int $number)
-{
-    $digits = str_split($number);
-
-    if ($number == 200) {
-        return 'TWO HUNDRED';
+    if ($digits[1] > 0 && $digits[2] > 0) {
+        $key = $digits[0] * 100;
+        return $hundreds[$key] . ' ' . numberNames($digits[1] . $digits[2]);
     }
 
-    return 'TWO HUNDRED ' . numberNames(number: $digits[1] . $digits[2]);
-}
-
-function threeHundred(int $number)
-{
-    $digits = str_split($number);
-
-    if ($number == 300) {
-        return 'THREE HUNDRED';
-    }
-
-    return 'THREE HUNDRED ' . numberNames(number: $digits[1] . $digits[2]);
-}
-
-function fourHundred(int $number)
-{
-    $digits = str_split($number);
-
-    if ($number == 400) {
-        return 'FOUR HUNDRED';
-    }
-
-    return 'FOUR HUNDRED ' . numberNames(number: $digits[1] . $digits[2]);
-}
-
-function fiveHundred(int $number)
-{
-    $digits = str_split($number);
-
-    if ($number == 500) {
-        return 'FIVE HUNDRED';
-    }
-
-    return 'FIVE HUNDRED ' . numberNames(number: $digits[1] . $digits[2]);
-}
-
-function sixHundred(int $number)
-{
-    $digits = str_split($number);
-
-    if ($number == 600) {
-        return 'SIX HUNDRED';
-    }
-
-    return 'SIX HUNDRED ' . numberNames(number: $digits[1] . $digits[2]);
-}
-
-function sevenHundred(int $number)
-{
-    $digits = str_split($number);
-
-    if ($number == 700) {
-        return 'SEVEN HUNDRED';
-    }
-
-    return 'SEVEN HUNDRED ' . numberNames(number: $digits[1] . $digits[2]);
-}
-
-function eightHundred(int $number)
-{
-    $digits = str_split($number);
-
-    if ($number == 800) {
-        return 'EIGHT HUNDRED';
-    }
-
-    return 'EIGHT HUNDRED ' . numberNames(number: $digits[1] . $digits[2]);
-}
-
-function nineHundred(int $number)
-{
-    $digits = str_split($number);
-
-    if ($number == 900) {
-        return 'NINE HUNDRED';
-    }
-
-    return 'NINE HUNDRED ' . numberNames(number: $digits[1] . $digits[2]);
+    return $hundreds[$number];
 }
 
 function cent($number)
