@@ -66,7 +66,7 @@ class NumberController
             return $word . ' ' . $notation;
         }, $words, $notations);
 
-        if (count($number) < 2) {
+        if (count($number) < 2 || $number[1] == 0 || $number[1] == 00) {
             return implode(' ', $numberToWords) . PHP_EOL;
         }
 
