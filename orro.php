@@ -158,6 +158,7 @@ function omitPrefixZero(string $number): string
 
 function numberToWords(float|int $number): string
 {
+    $number = number_format($number, 2, '.', '');
     $number = explode('.', $number);
     $words = [];
     $notations = [];
