@@ -6,19 +6,19 @@ use App\Model\Number;
 
 class NumberController
 {
-    public Number $numberModel;
+    protected Number $numberModel;
 
     public function __construct()
     {
         $this->numberModel = new Number();
     }
 
-    public function cent(int $number): string
+    protected function cent(int $number): string
     {
         return 'AND ' . $this->numberModel->numberNames(number: $number) . ' CENTS';
     }
 
-    public function groupNumbers(float|int $number): array
+    protected function groupNumbers(float|int $number): array
     {
         $mainNumbers = explode('.', $number);
         $reverseOrder = strrev($mainNumbers[0]);
@@ -33,7 +33,7 @@ class NumberController
         }, $revGroup);
     }
 
-    public function omitPrefixZero(string $number): string
+    protected function omitPrefixZero(string $number): string
     {
         $toArray = str_split($number);
         if ($toArray[0] == 0) {
