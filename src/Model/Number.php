@@ -4,7 +4,7 @@ namespace App\Model;
 
 class Number
 {
-    public array $notations = [
+    protected array $notations = [
 //        3 => 'HUNDRED',
         4 => 'THOUSAND',
         5 => 'THOUSAND', //TEN
@@ -13,7 +13,7 @@ class Number
         8 => 'MILLION', //TENS MILLION. This is the limit, if you put number bigger than this the script will fail
     ];
 
-    public array $ones = [
+    protected array $ones = [
         0 => '',
         1 => 'ONE',
         2 => 'TWO',
@@ -26,7 +26,7 @@ class Number
         9 => 'NINE',
     ];
 
-    public array $tens = [
+    protected array $tens = [
         20 => 'TWENTY',
         30 => 'THIRTY',
         40 => 'FORTY',
@@ -37,7 +37,7 @@ class Number
         90 => 'NINETY',
     ];
 
-    public array $teens = [
+    protected array $teens = [
         10 => 'TEN',
         11 => 'ELEVEN',
         12 => 'TWELVE',
@@ -50,7 +50,7 @@ class Number
         19 => 'NINETEEN',
     ];
 
-    public array $hundreds = [
+    protected array $hundreds = [
         100 => 'ONE HUNDRED',
         200 => 'TWO HUNDRED',
         300 => 'THREE HUNDRED',
@@ -62,7 +62,7 @@ class Number
         900 => 'NINE HUNDRED',
     ];
 
-    public function scientificNotationName(int $number)
+    public function notation(int $number)
     {
         $key = strlen($number);
 
@@ -82,12 +82,12 @@ class Number
                 }
 
                 if (str_split($number)[0] > 1) {
-                    return $this->tensToWords(number: $number);
+                    return $this->tens(number: $number);
                 }
                 break;
             case 3:
                 if (str_split($number)[0] > 0) {
-                    return $this->hundredsToWords(number: $number);
+                    return $this->hundreds(number: $number);
                 }
                 break;
         }
@@ -95,12 +95,12 @@ class Number
         return $this->ones[$number];
     }
 
-    public function teens(int $key): string
+    protected function teens(int $key): string
     {
         return $this->teens[$key];
     }
 
-    public function tensToWords(int $number): string
+    protected function tens(int $number): string
     {
         $digits = str_split($number);
 
@@ -112,7 +112,7 @@ class Number
         return $this->tens[$number];
     }
 
-    public function hundredsToWords(int $number): string
+    protected function hundreds(int $number): string
     {
         $digits = str_split($number);
 

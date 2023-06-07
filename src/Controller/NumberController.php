@@ -33,12 +33,6 @@ class NumberController
         }, $revGroup);
     }
 
-//    public function backToString(array $number): string
-//    {
-//        $string = implode('', $number);
-//        return strrev($string);
-//    }
-
     public function omitPrefixZero(string $number): string
     {
         $toArray = str_split($number);
@@ -60,7 +54,7 @@ class NumberController
         $numberArrLength = count($this->groupNumbers(number: $number[0]));
         $arrCopy = $this->groupNumbers(number: $number[0]);
         for ($i = 0; $i < $numberArrLength;) {
-            $notations[] = $this->numberModel->scientificNotationName(number: $this->omitPrefixZero(number: substr($number[0], $i, $numberLength)));
+            $notations[] = $this->numberModel->notation(number: $this->omitPrefixZero(number: substr($number[0], $i, $numberLength)));
             $i += strlen($arrCopy[$i]);
         }
 
@@ -78,4 +72,5 @@ class NumberController
 
         return implode(' ', $numberToWords) . $this->cent(number: $number[1]) . PHP_EOL;
     }
+
 }
