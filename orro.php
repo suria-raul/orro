@@ -35,6 +35,96 @@ function numberNames(int $number)
         7 => 'SEVEN',
         8 => 'EIGHT',
         9 => 'NINE',
+//        10 => 'TEN',
+//        11 => 'ELEVEN',
+//        12 => 'TWELVE',
+//        13 => 'THIRTEEN',
+//        14 => 'FOURTEEN',
+//        15 => 'FIFTEEN',
+//        16 => 'SIXTEEN',
+//        17 => 'SEVENTEEN',
+//        18 => 'EIGHTEEN',
+//        19 => 'NINETEEN',
+//        20 => 'TWENTY',
+//        21 => 'TWENTY ONE',
+//        22 => 'TWENTY TWO',
+//        23 => 'TWENTY THREE',
+//        24 => 'TWENTY FOUR',
+//        25 => 'TWENTY FIVE',
+//        26 => 'TWENTY SIX',
+//        27 => 'TWENTY SEVEN',
+//        28 => 'TWENTY EIGHT',
+//        29 => 'TWENTY NINE',
+//        30 => 'THIRTY',
+//        31 => 'THIRTY ONE',
+//        32 => 'THIRTY TWO',
+//        33 => 'THIRTY THREE',
+//        34 => 'THIRTY FOUR',
+//        35 => 'THIRTY FIVE',
+//        36 => 'THIRTY SIX',
+//        37 => 'THIRTY SEVEN',
+//        38 => 'THIRTY EIGHT',
+//        39 => 'THIRTY NINE',
+//        40 => 'FORTY',
+//        41 => 'FORTY ONE',
+//        42 => 'FORTY TWO',
+//        43 => 'FORTY THREE',
+//        44 => 'FORTY FOUR',
+//        45 => 'FORTY FIVE',
+//        46 => 'FORTY SIX',
+//        47 => 'FORTY SEVEN',
+//        48 => 'FORTY EIGHT',
+//        49 => 'FORTY NINE',
+//        50 => 'FIFTY',
+//        51 => 'FIFTY ONE',
+//        52 => 'FIFTY TWO',
+//        53 => 'FIFTY THREE',
+//        54 => 'FIFTY FOUR',
+//        55 => 'FIFTY FIVE',
+//        56 => 'FIFTY SIX',
+//        57 => 'FIFTY SEVEN',
+//        58 => 'FIFTY EIGHT',
+//        59 => 'FIFTY NINE',
+//        60 => 'SIXTY',
+//        61 => 'SIXTY ONE',
+//        62 => 'SIXTY TWO',
+//        63 => 'SIXTY THREE',
+//        64 => 'SIXTY FOUR',
+//        65 => 'SIXTY FIVE',
+//        66 => 'SIXTY SIX',
+//        67 => 'SIXTY SEVEN',
+//        68 => 'SIXTY EIGHT',
+//        69 => 'SIXTY NINE',
+//        70 => 'SEVENTY',
+//        71 => 'SEVENTY ONE',
+//        72 => 'SEVENTY TWO',
+//        73 => 'SEVENTY THREE',
+//        74 => 'SEVENTY FOUR',
+//        75 => 'SEVENTY FIVE',
+//        76 => 'SEVENTY SIX',
+//        77 => 'SEVENTY SEVEN',
+//        78 => 'SEVENTY EIGHT',
+//        79 => 'SEVENTY NINE',
+//        80 => 'EIGHTY',
+//        81 => 'EIGHTY ONE',
+//        82 => 'EIGHTY TWO',
+//        83 => 'EIGHTY THREE',
+//        84 => 'EIGHTY FOUR',
+//        85 => 'EIGHTY FIVE',
+//        86 => 'EIGHTY SIX',
+//        87 => 'EIGHTY SEVEN',
+//        88 => 'EIGHTY EIGHT',
+//        89 => 'EIGHTY NINE',
+//        90 => 'NINETY',
+//        91 => 'NINETY ONE',
+//        92 => 'NINETY TWO',
+//        93 => 'NINETY THREE',
+//        94 => 'NINETY FOUR',
+//        95 => 'NINETY FIVE',
+//        96 => 'NINETY SIX',
+//        97 => 'NINETY SEVEN',
+//        98 => 'NINETY EIGHT',
+//        99 => 'NINETY NINE',
     ];
 
     if (strlen($number) == 2) {
@@ -42,8 +132,37 @@ function numberNames(int $number)
             return teens($number);
         }
 
-        generateNumberWord($number);
+        if (str_split($number)[0] == 2) {
+            return twenty($number);
+        }
 
+        if (str_split($number)[0] == 3) {
+            return thirty($number);
+        }
+
+        if (str_split($number)[0] == 4) {
+            return forty($number);
+        }
+
+        if (str_split($number)[0] == 5) {
+            return fifty($number);
+        }
+
+        if (str_split($number)[0] == 6) {
+            return sixty($number);
+        }
+
+        if (str_split($number)[0] == 7) {
+            return seventy($number);
+        }
+
+        if (str_split($number)[0] == 8) {
+            return eighty($number);
+        }
+
+        if (str_split($number)[0] == 9) {
+            return ninety($number);
+        }
     } elseif (strlen($number) == 3) {
         if (str_split($number)[0] == 1) {
             return oneHundred($number);
@@ -82,8 +201,6 @@ function numberNames(int $number)
         }
     }
 
-    echo 'numberNames ' . $number . PHP_EOL;
-
     return $ones[$number];
 }
 
@@ -105,31 +222,98 @@ function teens(int $key)
     return $numbers[$key];
 }
 
-function generateNumberWord(int $number): string
+function tens(int $key)
+{
+
+}
+
+function twenty(int $number)
 {
     $digits = str_split($number);
 
-    $tens = [
-        10 => 'TEN',
-        20 => 'TWENTY',
-        30 => 'THIRTY',
-        40 => 'FORTY',
-        50 => 'FIFTY',
-        60 => 'SIXTY',
-        70 => 'SEVENTY',
-        80 => 'EIGHTY',
-        90 => 'NINETY',
-    ];
-
-    if (count($digits) == 2) {
-        if ($digits[1] > 0) {
-            $key = $digits[0] * 10;
-            echo $tens[$key] . ' ' . numberNames(number: $digits[1]) . PHP_EOL;
-            return $tens[$key] . ' ' . numberNames(number: $digits[1]);
-        }
+    if ($number == 20) {
+        return 'TWENTY';
     }
 
-    return $tens[$number];
+    return 'TWENTY ' . numberNames(number: $digits[1]);
+}
+
+function thirty(int $number)
+{
+    $digits = str_split($number);
+
+    if ($number == 30) {
+        return 'THIRTY';
+    }
+
+    return 'THIRTY ' . numberNames(number: $digits[1]);
+}
+
+function forty(int $number)
+{
+    $digits = str_split($number);
+
+    if ($number == 40) {
+        return 'FORTY';
+    }
+
+    return 'FORTY ' . numberNames(number: $digits[1]);
+}
+
+function fifty(int $number)
+{
+    $digits = str_split($number);
+
+    if ($number == 50) {
+        return 'FIFTY';
+    }
+
+    return 'FIFTY ' . numberNames(number: $digits[1]);
+}
+
+function sixty(int $number)
+{
+    $digits = str_split($number);
+
+    if ($number == 60) {
+        return 'SIXTY';
+    }
+
+    return 'SIXTY ' . numberNames(number: $digits[1]);
+}
+
+function seventy(int $number)
+{
+    $digits = str_split($number);
+
+    if ($number == 70) {
+        return 'SEVENTY';
+    }
+
+    return 'SEVENTY ' . numberNames(number: $digits[1]);
+}
+
+function eighty(int $number)
+{
+    $digits = str_split($number);
+
+    if ($number == 80) {
+        return 'EIGHTY';
+    }
+
+    return 'EIGHTY ' . numberNames(number: $digits[1]);
+}
+
+
+function ninety(int $number)
+{
+    $digits = str_split($number);
+
+    if ($number == 90) {
+        return 'NINETY';
+    }
+
+    return 'NINETY ' . numberNames(number: $digits[1]);
 }
 
 function oneHundred(int $number)
@@ -137,7 +321,7 @@ function oneHundred(int $number)
     $digits = str_split($number);
 
     if ($number == 100) {
-        return 'ONE';
+        return 'ONE HUNDRED';
     }
 
     return 'ONE HUNDRED ' . numberNames(number: $digits[1] . $digits[2]);
@@ -233,7 +417,7 @@ function nineHundred(int $number)
 
 function cent($number)
 {
-    return ' AND ' . numberNames($number) . ' CENTS';
+    return 'AND ' . numberNames($number) . ' CENTS';
 }
 
 function groupNumbers($number): array
@@ -271,9 +455,11 @@ function numberToWords($number)
     $notations = [];
 
     $numberLength = strlen($number[0]);
-    $numberArrLength = count(groupNumbers($number[0])) - 1;
-    for ($i = 0; $i < $numberArrLength; $i++) {
+    $numberArrLength = count(groupNumbers($number[0]));
+    $arrCopy = groupNumbers($number[0]);
+    for ($i = 0; $i < $numberArrLength;) {
         $notations[] = scientificNotationName(omitPrefixZero(substr($number[0], $i, $numberLength)));
+        $i += strlen($arrCopy[$i]);
     }
 
     foreach (groupNumbers($number[0]) as $group) {
@@ -291,10 +477,10 @@ function numberToWords($number)
     return implode(' ', $numberToWords) . cent($number[1]) . PHP_EOL;
 }
 
-print_r(numberToWords(1789501.25));
+print_r(numberToWords(10002005.77));
 
 
-// 100001.01 failed (hundred thousand)
+// 100001.01 pass
 // 1789501.25 pass
 // 789481.00 pass
 // 2156175.50 failed (5 cents)
