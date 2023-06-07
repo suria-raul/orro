@@ -14,9 +14,9 @@ function scientificNotationName(int $number)
         5 => 'THOUSAND', //TEN
         6 => 'THOUSAND', // HUNDRED
         7 => 'MILLION',
-        8 => 'MILLION', //TEN
-        9 => 'HUNDRED MILLION',
-        10 => 'BILLION'
+        8 => 'MILLION', //TEN, This is the limit if you put number bigger than this, the script will fail
+//        9 => 'MILLION',
+//        10 => 'BILLION',
     ];
 
     return $notations[$key];
@@ -39,16 +39,16 @@ function numberNames(int $number): string
 
     if (strlen($number) == 2) {
         if (str_split($number)[0] == 1) {
-            return teens($number);
+            return teens(key: $number);
         }
 
         if (str_split($number)[0] > 1) {
-            return tensToWords($number);
+            return tensToWords(number: $number);
         }
 
     } elseif (strlen($number) == 3) {
         if (str_split($number)[0] > 0) {
-            return hundredsToWords($number);
+            return hundredsToWords(number: $number);
         }
     }
 
@@ -90,7 +90,7 @@ function tensToWords(int $number): string
 
     if ($digits[1] > 0) {
         $key = $digits[0] * 10;
-        return $tens[$key] . ' ' . numberNames($digits[1]);
+        return $tens[$key] . ' ' . numberNames(number: $digits[1]);
     }
 
     return $tens[$number];
@@ -114,12 +114,12 @@ function hundredsToWords(int $number): string
 
     if ($digits[1] == 0 && $digits[2] > 0) {
         $key = $digits[0] * 100;
-        return $hundreds[$key] . ' ' . numberNames($digits[2]);
+        return $hundreds[$key] . ' ' . numberNames(number: $digits[2]);
     }
 
     if ($digits[1] > 0 && $digits[2] > 0) {
         $key = $digits[0] * 100;
-        return $hundreds[$key] . ' ' . numberNames($digits[1] . $digits[2]);
+        return $hundreds[$key] . ' ' . numberNames(number: $digits[1] . $digits[2]);
     }
 
     return $hundreds[$number];
@@ -127,7 +127,7 @@ function hundredsToWords(int $number): string
 
 function cent(int $number): string
 {
-    return 'AND ' . numberNames($number) . ' CENTS';
+    return 'AND ' . numberNames(number: $number) . ' CENTS';
 }
 
 function groupNumbers(float|int $number): array
@@ -165,15 +165,15 @@ function numberToWords(float|int $number): string
     $notations = [];
 
     $numberLength = strlen($number[0]);
-    $numberArrLength = count(groupNumbers($number[0]));
-    $arrCopy = groupNumbers($number[0]);
+    $numberArrLength = count(groupNumbers(number: $number[0]));
+    $arrCopy = groupNumbers(number: $number[0]);
     for ($i = 0; $i < $numberArrLength;) {
-        $notations[] = scientificNotationName(omitPrefixZero(substr($number[0], $i, $numberLength)));
+        $notations[] = scientificNotationName(number: omitPrefixZero(number: substr($number[0], $i, $numberLength)));
         $i += strlen($arrCopy[$i]);
     }
 
     foreach (groupNumbers($number[0]) as $group) {
-        $words[] = omitPrefixZero(numberNames($group));
+        $words[] = omitPrefixZero(number: numberNames($group));
     }
 
     $numberToWords = array_map(function ($word, $notation) {
@@ -184,15 +184,18 @@ function numberToWords(float|int $number): string
         return implode(' ', $numberToWords) . PHP_EOL;
     }
 
-    return implode(' ', $numberToWords) . cent($number[1]) . PHP_EOL;
+    return implode(' ', $numberToWords) . cent(number: $number[1]) . PHP_EOL;
 }
 
-//print_r(numberToWords(10002005.77));
-echo numberToWords(10002005.77);
+$testNumbers = [
+    100001.01,
+    1789501.25,
+    789481.00,
+    2156175.50,
+    1111111.11,
+    10002005.77,
+];
 
-// 100001.01 pass
-// 1789501.25 pass
-// 789481.00 pass
-// 2156175.50 failed (5 cents)
-// 1111111.11 pass
-// 10002005.77 pass
+foreach ($testNumbers as $number) {
+    echo numberToWords(number: $number);
+}
