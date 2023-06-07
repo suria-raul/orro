@@ -12,7 +12,7 @@ function scientificNotationName(int $number)
 //        3 => 'HUNDRED',
         4 => 'THOUSAND',
         5 => 'THOUSAND', //TEN
-        6 => 'THOUSAND',
+        6 => 'THOUSAND', // HUNDRED
         7 => 'MILLION',
         8 => 'MILLION', //TEN
         9 => 'HUNDRED MILLION',
@@ -42,37 +42,41 @@ function numberNames(int $number)
             return teens($number);
         }
 
-        if (str_split($number)[0] == 2) {
-            return twenty($number);
+        if (str_split($number)[0] > 1) {
+            return tensToWords($number);
         }
 
-        if (str_split($number)[0] == 3) {
-            return thirty($number);
-        }
-
-        if (str_split($number)[0] == 4) {
-            return forty($number);
-        }
-
-        if (str_split($number)[0] == 5) {
-            return fifty($number);
-        }
-
-        if (str_split($number)[0] == 6) {
-            return sixty($number);
-        }
-
-        if (str_split($number)[0] == 7) {
-            return seventy($number);
-        }
-
-        if (str_split($number)[0] == 8) {
-            return eighty($number);
-        }
-
-        if (str_split($number)[0] == 9) {
-            return ninety($number);
-        }
+//        if (str_split($number)[0] == 2) {
+//            return twenty($number);
+//        }
+//
+//        if (str_split($number)[0] == 3) {
+//            return thirty($number);
+//        }
+//
+//        if (str_split($number)[0] == 4) {
+//            return forty($number);
+//        }
+//
+//        if (str_split($number)[0] == 5) {
+//            return fifty($number);
+//        }
+//
+//        if (str_split($number)[0] == 6) {
+//            return sixty($number);
+//        }
+//
+//        if (str_split($number)[0] == 7) {
+//            return seventy($number);
+//        }
+//
+//        if (str_split($number)[0] == 8) {
+//            return eighty($number);
+//        }
+//
+//        if (str_split($number)[0] == 9) {
+//            return ninety($number);
+//        }
     } elseif (strlen($number) == 3) {
         if (str_split($number)[0] == 1) {
             return oneHundred($number);
@@ -132,7 +136,7 @@ function teens(int $key)
     return $numbers[$key];
 }
 
-function tensToWords(int $key)
+function tensToWords(int $number)
 {
     $tens = [
         20 => 'TWENTY',
@@ -145,7 +149,14 @@ function tensToWords(int $key)
         90 => 'NINETY',
     ];
 
-    return $tens[$key];
+    $digits = str_split($number);
+
+    if ($digits[1] > 0) {
+        $key = $digits[0] * 10;
+        return $tens[$key] . ' ' . numberNames($digits[1]);
+    }
+
+    return $tens[$number];
 }
 
 function twenty(int $number)
