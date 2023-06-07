@@ -14,9 +14,7 @@ function scientificNotationName(int $number)
         5 => 'THOUSAND', //TEN
         6 => 'THOUSAND', // HUNDRED
         7 => 'MILLION',
-        8 => 'MILLION', //TEN, This is the limit if you put number bigger than this, the script will fail
-//        9 => 'MILLION',
-//        10 => 'BILLION',
+        8 => 'MILLION', //TENS MILLION. This is the limit, if you put number bigger than this the script will fail
     ];
 
     return $notations[$key];
@@ -194,6 +192,7 @@ $testNumbers = [
     2156175.50,
     1111111.11,
     10002005.77,
+    99999999.99, //highest number that this script can handle
 ];
 
 foreach ($testNumbers as $number) {
