@@ -46,37 +46,6 @@ function numberNames(int $number)
             return tensToWords($number);
         }
 
-//        if (str_split($number)[0] == 2) {
-//            return twenty($number);
-//        }
-//
-//        if (str_split($number)[0] == 3) {
-//            return thirty($number);
-//        }
-//
-//        if (str_split($number)[0] == 4) {
-//            return forty($number);
-//        }
-//
-//        if (str_split($number)[0] == 5) {
-//            return fifty($number);
-//        }
-//
-//        if (str_split($number)[0] == 6) {
-//            return sixty($number);
-//        }
-//
-//        if (str_split($number)[0] == 7) {
-//            return seventy($number);
-//        }
-//
-//        if (str_split($number)[0] == 8) {
-//            return eighty($number);
-//        }
-//
-//        if (str_split($number)[0] == 9) {
-//            return ninety($number);
-//        }
     } elseif (strlen($number) == 3) {
         if (str_split($number)[0] == 1) {
             return oneHundred($number);
@@ -157,95 +126,6 @@ function tensToWords(int $number)
     }
 
     return $tens[$number];
-}
-
-function twenty(int $number)
-{
-    $digits = str_split($number);
-
-    if ($number == 20) {
-        return 'TWENTY';
-    }
-
-    return 'TWENTY ' . numberNames(number: $digits[1]);
-}
-
-function thirty(int $number)
-{
-    $digits = str_split($number);
-
-    if ($number == 30) {
-        return 'THIRTY';
-    }
-
-    return 'THIRTY ' . numberNames(number: $digits[1]);
-}
-
-function forty(int $number)
-{
-    $digits = str_split($number);
-
-    if ($number == 40) {
-        return 'FORTY';
-    }
-
-    return 'FORTY ' . numberNames(number: $digits[1]);
-}
-
-function fifty(int $number)
-{
-    $digits = str_split($number);
-
-    if ($number == 50) {
-        return 'FIFTY';
-    }
-
-    return 'FIFTY ' . numberNames(number: $digits[1]);
-}
-
-function sixty(int $number)
-{
-    $digits = str_split($number);
-
-    if ($number == 60) {
-        return 'SIXTY';
-    }
-
-    return 'SIXTY ' . numberNames(number: $digits[1]);
-}
-
-function seventy(int $number)
-{
-    $digits = str_split($number);
-
-    if ($number == 70) {
-        return 'SEVENTY';
-    }
-
-    return 'SEVENTY ' . numberNames(number: $digits[1]);
-}
-
-function eighty(int $number)
-{
-    $digits = str_split($number);
-
-    if ($number == 80) {
-        return 'EIGHTY';
-    }
-
-    return 'EIGHTY ' . numberNames(number: $digits[1]);
-}
-
-
-function ninety(int $number)
-{
-    $digits = str_split($number);
-
-    if ($number == 90) {
-        return 'NINETY';
-    }
-
-    return 'NINETY ' . numberNames(number: $digits[1]);
 }
 
 function oneHundred(int $number)
