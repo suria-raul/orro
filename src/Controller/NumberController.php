@@ -67,10 +67,10 @@ class NumberController
         }, $words, $notations);
 
         if (count($number) < 2 || $number[1] == 0 || $number[1] == 00) {
-            return implode(' ', $numberToWords) . PHP_EOL;
+            return implode(' ', $numberToWords) . 'DOLLARS' . PHP_EOL;
         }
 
-        return implode(' ', $numberToWords) . $this->cent(number: $number[1]) . PHP_EOL;
+        return implode(' ', $numberToWords) . 'DOLLARS' . $this->cent(number: $number[1]) . PHP_EOL;
     }
 
 }
