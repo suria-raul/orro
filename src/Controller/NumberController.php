@@ -45,6 +45,10 @@ class NumberController
 
     public function numberToWords(float|int $number): string
     {
+        if (strlen($number) > 8) {
+            return 'MAXIMUM LIMIT EXCEEDED!';
+        }
+        
         $number = number_format($number, 2, '.', '');
         $number = explode('.', $number);
         $words = [];
@@ -66,11 +70,11 @@ class NumberController
             return $word . ' ' . $notation;
         }, $words, $notations);
 
-        if (count($number) < 2 || $number[1] == 0 || $number[1] == 00) {
-            return implode(' ', $numberToWords) . 'DOLLARS' . PHP_EOL;
+        if (count($number) < 2 || $number[1] == 0) {
+            return implode(' ', $numberToWords) . PHP_EOL;
         }
 
-        return implode(' ', $numberToWords) . 'DOLLARS' . $this->cent(number: $number[1]) . PHP_EOL;
+        return implode(' ', $numberToWords) . $this->cent(number: $number[1]) . PHP_EOL;
     }
 
 }
