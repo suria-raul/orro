@@ -13,5 +13,5 @@ $testNumbers = [
 ];
 
 foreach ($testNumbers as $number) {
-    echo (new \App\Controller\NumberController())->numberToWords(number: $number) . "<br>"; //<br> for rendering in html
+    echo (new \App\Controller\NumberController())->numberToWords(number: $number);
 }
