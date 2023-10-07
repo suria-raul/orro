@@ -13,7 +13,7 @@ class NumberController
         $this->numberModel = new Number();
     }
 
-    protected function cent(int $number): string
+    protected function cents(int $number): string
     {
         return $this->numberModel->numberNames(number: $number) . ' CENTS';
     }
@@ -70,7 +70,7 @@ class NumberController
             return implode(' ', $numberToWords) . 'DOLLARS' . PHP_EOL;
         }
 
-        return implode(' ', $numberToWords) . 'DOLLARS AND ' . $this->cent(number: $number[1]) . PHP_EOL;
+        return implode(' ', $numberToWords) . 'DOLLARS AND ' . $this->cents(number: $number[1]) . PHP_EOL;
     }
 
 }
