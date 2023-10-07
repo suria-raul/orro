@@ -15,7 +15,7 @@ class NumberController
 
     protected function cent(int $number): string
     {
-        return ' AND ' . $this->numberModel->numberNames(number: $number) . ' CENTS';
+        return $this->numberModel->numberNames(number: $number) . ' CENTS';
     }
 
     protected function groupNumbers(float|int $number): array
@@ -70,7 +70,7 @@ class NumberController
             return implode(' ', $numberToWords) . 'DOLLARS' . PHP_EOL;
         }
 
-        return implode(' ', $numberToWords) . 'DOLLARS' . $this->cent(number: $number[1]) . PHP_EOL;
+        return implode(' ', $numberToWords) . 'DOLLARS AND ' . $this->cent(number: $number[1]) . PHP_EOL;
     }
 
 }
